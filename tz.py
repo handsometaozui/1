@@ -94,7 +94,7 @@ else:
         wordcloud = WordCloud(
             width=800,
             height=400,
-            font_path='ChillKai.ttf',  # 替换为中文字体路径
+            font_path='文泉驿正黑.ttc',  # 替换为中文字体路径
             background_color='white'
         ).generate_from_frequencies(df_top20.set_index('词语')['频次'].to_dict())
 
