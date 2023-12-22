@@ -94,15 +94,25 @@ else:
 
 
         # 生成词云，使用前二十的词频数据
-        wordcloud = WordCloud(
-            width=800,
-            height=400,
-            font_path=r'D:\字体\寒蝉正楷体\ChillKai.ttf',  # 替换为中文字体路径
-            background_color='white'
-        ).generate_from_frequencies(df_top20.set_index('词语')['频次'].to_dict())
+        # wordcloud = WordCloud(
+        #     width=800,
+        #     height=400,
+        #     font_path=r'D:\字体\寒蝉正楷体\ChillKai.ttf',  # 替换为中文字体路径
+        #     background_color='white'
+        # ).generate_from_frequencies(df_top20.set_index('词语')['频次'].to_dict())
 
-        st.subheader("词云图:")
-        st.image(wordcloud.to_array(), caption="词云图", use_column_width=True)
+        # st.subheader("词云图:")
+        # st.image(wordcloud.to_array(), caption="词云图", use_column_width=True)
+        text_data = df_top20.set_index('词语')['频次'].to_dict()
+
+        # 创建词云对象
+        wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(text_data)
+
+        # 使用 matplotlib 显示词云图
+        plt.figure(figsize=(10, 5))
+        plt.imshow(wordcloud, interpolation='bilinear')
+        plt.axis('off')
+        plt.show()
 
     except requests.exceptions.MissingSchema:
         st.sidebar.warning("请输入有效的URL")
